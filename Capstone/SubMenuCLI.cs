@@ -4,10 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-
 namespace Capstone
 {
-    public class MainMenuCLI
+    public class SubMenuCLI
     {
 
         const string Command_AllParks = "1";
@@ -28,12 +27,12 @@ namespace Capstone
                 switch (command.ToLower())
                 {
                     case Command_AllParks:
-                        GetAllParks();
+                        GetAllCampgrounds();
                         break;
 
-                    //case Command_MakeReservation:
-                    //    MakeReservation();
-                        break;
+                        //case Command_MakeReservation:
+                        //    MakeReservation();
+                       // break;
 
                     case Command_Quit:
                         Console.WriteLine("Thank you for using the project organizer");
@@ -49,16 +48,17 @@ namespace Capstone
             }
         }
 
-        private void GetAllParks()
+        private void GetAllCampgrounds()
         {
-            IPark dal = new ParkSqlDAL(DatabaseConnectionString);
-            IList<Park> parks = dal.GetAllParks();
+            ICampground dal = new CampgroundSqlDAL(DatabaseConnectionString);
 
-            if (parks.Count > 0)
+            IList<Campground> campgrounds = dal.GetAllCampgrounds(park_Id);
+
+            if (campgrounds.Count > 0)
             {
-                foreach (Park park in parks)
+                foreach (Campground campground in campgrounds)
                 {
-                    Console.WriteLine(park.Park_Id.ToString() + ")" .PadRight(3) + park.Name.PadRight(20));
+                    Console.WriteLine(campground.Campground_Id.ToString() + ")".PadRight(3) + campground.Name.PadRight(20));
                 }
             }
             else
