@@ -9,7 +9,7 @@ namespace Capstone
 {
     public class MainMenuCLI
     {
-
+        //Gives meaning to your cases
         const string Command_AllParks = "1";
         const string Command_MakeReservation = "2";
         const string Command_Quit = "q";
@@ -28,15 +28,12 @@ namespace Capstone
                 switch (command.ToLower())
                 {
                     case Command_AllParks:
-                        GetAllParks();
-                        break;
-
-                    //case Command_MakeReservation:
-                    //    MakeReservation();
+                        ParkMenuCLI parkMenu = new ParkMenuCLI(this.GetAllParks());
+                        parkMenu.RunCLI();
                         break;
 
                     case Command_Quit:
-                        Console.WriteLine("Thank you for using the project organizer");
+                        Console.WriteLine("Thank you for using the Reservation Application.");
                         return;
 
                     default:
@@ -44,34 +41,21 @@ namespace Capstone
                         break;
 
                 }
-
-                PrintMenu();
             }
         }
 
-        private void GetAllParks()
+        private IList<Park> GetAllParks()
         {
             IPark dal = new ParkSqlDAL(DatabaseConnectionString);
             IList<Park> parks = dal.GetAllParks();
 
-            if (parks.Count > 0)
-            {
-                foreach (Park park in parks)
-                {
-                    Console.WriteLine(park.Park_Id.ToString() + ")" .PadRight(3) + park.Name.PadRight(20));
-                }
-            }
-            else
-            {
-                Console.WriteLine("**** NO RESULTS ****");
-            }
+            return parks;
         }
 
         private void PrintMenu()
         {
             Console.WriteLine("Main Menu Please type in a command");
             Console.WriteLine(" 1) - View all Parks");
-            Console.WriteLine(" 2) - Make a Reservation");
             Console.WriteLine(" Q) - Quit");
             Console.WriteLine();
 

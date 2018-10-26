@@ -12,7 +12,7 @@ namespace Capstone.DAL
 
         public ParkSqlDAL(string dbConnectionString)
         {
-            connectionString = dbConnectionString;
+            this.connectionString = dbConnectionString;
         }
 
         public IList<Park> GetAllParks()
@@ -21,7 +21,7 @@ namespace Capstone.DAL
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
                     conn.Open();
 
@@ -49,6 +49,7 @@ namespace Capstone.DAL
                 Console.WriteLine("Error reading Park data.");
                 throw;
             }
+
             return output;
         }
     }

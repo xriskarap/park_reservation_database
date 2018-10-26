@@ -8,6 +8,7 @@ namespace Capstone.DAL
     public interface IReservation
     {
         IList<Reservation> GetReservations();
+
         int CreateReservation(Reservation newReservation);
     }
 }
