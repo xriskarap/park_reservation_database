@@ -41,10 +41,9 @@
             Console.WriteLine();
             Console.WriteLine($"{selectedPark.Description}");
             Console.WriteLine();
-
             ICampground dal = new CampgroundSqlDAL(DatabaseConnectionString);
-            IList<Campground> campground = dal.GetAllCampgrounds(selectedPark.Park_Id);
-            ParkCampgroundsMenu campgroundsMenu = new ParkCampgroundsMenu(campground);
+            IList<Campground> campgrounds = dal.GetAllCampgrounds(selectedPark.Park_Id);
+            ParkCampgroundsMenu campgroundsMenu = new ParkCampgroundsMenu(campgrounds);
             campgroundsMenu.RunCLI();
         }
 

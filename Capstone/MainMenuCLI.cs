@@ -44,7 +44,7 @@ namespace Capstone
             }
         }
 
-        private IList<Park> GetAllParks()
+        public IList<Park> GetAllParks()
         {
             IPark dal = new ParkSqlDAL(DatabaseConnectionString);
             IList<Park> parks = dal.GetAllParks();
