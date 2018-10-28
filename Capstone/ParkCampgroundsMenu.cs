@@ -111,7 +111,7 @@
             Console.WriteLine($"   {name.PadRight(34)}{open.PadRight(16)}{close.PadRight(16)}{fee}");
             foreach (Campground ground in this.campground)
             {
-                Console.WriteLine($"#{ground.Park_Id} {ground.Name.PadRight(34)} {ground.Open_From_Mm.ToString().PadRight(15)} {ground.Open_To_Mm.ToString().PadRight(15)} ${ground.Daily_Fee.ToString()}");
+                Console.WriteLine($"#{ground.Campground_Id} {ground.Name.PadRight(34)} {ground.Open_From_Mm.ToString().PadRight(15)} {ground.Open_To_Mm.ToString().PadRight(15)} ${ground.Daily_Fee.ToString()}");
             }
         }
     }

@@ -8,7 +8,6 @@ namespace Capstone.DAL
 {
     public class ReservationSqlDAL : IReservation
     {
-        // private const string getCampgrounds = @"SELECT * FROM campground WHERE park_id = @parkID ORDER BY name;";
         private string connectionString;
 
         public ReservationSqlDAL(string dbConnectionString)
@@ -42,11 +41,6 @@ namespace Capstone.DAL
             }
 
             return reservation;
-        }
-
-        public IList<Reservation> MakeReservations()
-        {
-            throw new NotImplementedException();
         }
     }
 }
