@@ -54,10 +54,8 @@
             {
                 selection++;
                 Console.WriteLine($"{selection}) {park.Name}");
-
             }
         }
-
 
         private void PrintMenu()
         {
@@ -66,7 +64,6 @@
             this.PrintParks();
             Console.WriteLine("Q) - Quit");
             Console.WriteLine();
-
         }
     }
 }

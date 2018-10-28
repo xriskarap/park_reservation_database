@@ -56,8 +56,6 @@
                     //    parkMenu.RunCLI();
                     //    break;
 
-
-
                     default:
                         Console.WriteLine("The command provided was not a valid command, please try again.");
                         break;
