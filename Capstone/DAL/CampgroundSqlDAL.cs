@@ -16,6 +16,11 @@ namespace Capstone.DAL
             this.connectionString = dbConnectionString;
         }
 
+        /// <summary>
+        /// Queries the database to return a list of all Campgrounds within a particular Park
+        /// </summary>
+        /// <param name="park_Id">Park containing the Campground</param>
+        /// <returns>A list of Campgrounds</returns>
         public IList<Campground> GetAllCampgrounds(int park_Id)
         {
             List<Campground> output = new List<Campground>();

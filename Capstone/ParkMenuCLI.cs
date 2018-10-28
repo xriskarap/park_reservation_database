@@ -23,6 +23,10 @@
             this.RunCLI();
         }
 
+        /// <summary>
+        /// Allows the user to view all of the information for any given park
+        /// If the user presses "Q" or "q", they will be brought to the previous menu
+        /// </summary>
         public void RunCLI()
         {
             this.PrintMenu();
@@ -53,6 +57,9 @@
             return;
         }
 
+        /// <summary>
+        /// Displays all parks with the corresponding selection number for the user
+        /// </summary>
     private void PrintParks()
         {
             int selection = 0;
@@ -63,6 +70,9 @@
             }
         }
 
+        /// <summary>
+        /// Prints the menu allowing users to select a specific park
+        /// </summary>
         private void PrintMenu()
         {
             Console.WriteLine("Select a Park for Further Details");

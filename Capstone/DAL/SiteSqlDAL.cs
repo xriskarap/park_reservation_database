@@ -20,7 +20,13 @@ namespace Capstone.DAL
             throw new NotImplementedException();
         }
 
-
+        /// <summary>
+        /// Queries the database to select all Sites within a Campground
+        /// </summary>
+        /// <param name="startDate">Start date for a Reservation</param>
+        /// <param name="endDate">End date for a Reservation</param>
+        /// <param name="siteId">The id associated with an individual site</param>
+        /// <returns>A list of all Sites</returns>
         public IList<Site> GetAvailableSites(DateTime startDate, DateTime endDate, int siteId)
         {
             List<Site> availSites = new List<Site>();
