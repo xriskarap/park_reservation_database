@@ -15,6 +15,15 @@ namespace Capstone.DAL
             this.connectionString = dbConnectionString;
         }
 
+//        SELECT* FROM
+
+//    site
+//     WHERE site_id NOT IN
+//(SELECT site_id
+//  FROM[NPCampsite].[dbo].[reservation]
+//  WHERE (from_date BETWEEN '2018-10-21' AND '2018-10-28')
+//  AND(to_date BETWEEN '2018-10-21' AND '2018-10-28'))
+
         public IList<Reservation> MakeReservation(Reservation newReservation)
         {
             List<Reservation> reservation = new List<Reservation>();

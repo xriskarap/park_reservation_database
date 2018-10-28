@@ -38,9 +38,10 @@ namespace Capstone.DAL
             }
             catch (SqlException ex)
             {
-                Console.WriteLine("Error reading Campground data.");
+                Console.WriteLine(ex.Message);
                 throw;
             }
+
             return output;
         }
 
@@ -49,7 +50,7 @@ namespace Capstone.DAL
             Campground campground = new Campground();
             campground.Campground_Id = Convert.ToInt32(reader["campground_id"]);
             campground.Park_Id = Convert.ToInt32(reader["park_id"]);
-            campground.Name = Convert.ToString(reader["name"]); 
+            campground.Name = Convert.ToString(reader["name"]);
             campground.Open_From_Mm = Convert.ToInt32(reader["open_from_mm"]);
             campground.Open_To_Mm = Convert.ToInt32(reader["open_to_mm"]);
             campground.Daily_Fee = Convert.ToDecimal(reader["daily_fee"]);

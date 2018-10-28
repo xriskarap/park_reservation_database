@@ -33,7 +33,7 @@
         // Gives meaning to your cases
         const string Command_ViewAllCampgrounds = "1";
         const string Command_SearchForReservation = "2";
-        const string Command_ReturnToPreviousMenu = "Q";
+        const string Command_ReturnToPreviousMenu = "3";
         public const string DatabaseConnectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPCampsite;Integrated Security=True";
 
         public void RunCLI()
@@ -55,7 +55,10 @@
                     //    ParkMenuCLI parkMenu = new ParkMenuCLI(GetAllParks());
                     //    parkMenu.RunCLI();
                     //    break;
-
+                    case Command_ReturnToPreviousMenu:
+                        Console.Clear();
+                        new ParkMenuCLI();
+                        return;
                     default:
                         Console.WriteLine("The command provided was not a valid command, please try again.");
                         break;
@@ -102,8 +105,9 @@
             return campground;
         }
 
-        private void PrintCampground()
+        private ReservationCLI PrintCampground()
         {
+            int selection = 0;
             string name = "Name";
             string open = "Open";
             string close = "Close";
@@ -111,8 +115,34 @@
             Console.WriteLine($"   {name.PadRight(34)}{open.PadRight(16)}{close.PadRight(16)}{fee}");
             foreach (Campground ground in this.campground)
             {
-                Console.WriteLine($"#{ground.Campground_Id} {ground.Name.PadRight(34)} {ground.Open_From_Mm.ToString().PadRight(15)} {ground.Open_To_Mm.ToString().PadRight(15)} ${ground.Daily_Fee.ToString()}");
+                selection++;
+                Console.WriteLine($"#{selection} {ground.Name.PadRight(34)} {ground.Open_From_Mm.ToString().PadRight(15)} {ground.Open_To_Mm.ToString().PadRight(15)} {ground.Daily_Fee:C}");
             }
+
+            return this.GetUserSelection();
+        }
+
+        private ReservationCLI GetUserSelection()
+        {
+            Campground campground = new Campground();
+
+            Console.WriteLine();
+            Console.WriteLine("Which campground (enter 0 to cancel)");
+
+            int userSelection = int.Parse(Console.ReadLine());
+
+            while (userSelection > this.campground.Count)
+            {
+                Console.WriteLine("Sorry, that's not a valid selection.");
+                Console.WriteLine("Please make another selection.");
+                userSelection = int.Parse(Console.ReadLine());
+            }
+
+            campground = this.campground[userSelection - 1];
+
+            ReservationCLI reservationCLI = new ReservationCLI(campground);
+
+            return reservationCLI;
         }
     }
 }

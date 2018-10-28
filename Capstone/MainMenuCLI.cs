@@ -17,7 +17,7 @@ namespace Capstone
 
         public void RunCLI()
         {
-            PrintMenu();
+            this.PrintMenu();
 
             while (true)
             {
@@ -28,9 +28,8 @@ namespace Capstone
                 switch (command.ToLower())
                 {
                     case Command_AllParks:
-                        ParkMenuCLI parkMenu = new ParkMenuCLI(this.GetAllParks());
-                        parkMenu.RunCLI();
-                        break;
+                        new ParkMenuCLI();
+                        return;
 
                     case Command_Quit:
                         Console.WriteLine("Thank you for using the Reservation Application.");
@@ -39,17 +38,8 @@ namespace Capstone
                     default:
                         Console.WriteLine("The command provided was not a valid command, please try again.");
                         break;
-
                 }
             }
-        }
-
-        public IList<Park> GetAllParks()
-        {
-            IPark dal = new ParkSqlDAL(DatabaseConnectionString);
-            IList<Park> parks = dal.GetAllParks();
-
-            return parks;
         }
 
         private void PrintMenu()
@@ -58,7 +48,6 @@ namespace Capstone
             Console.WriteLine(" 1) - View all Parks");
             Console.WriteLine(" Q) - Quit");
             Console.WriteLine();
-
         }
     }
 }

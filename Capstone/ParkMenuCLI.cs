@@ -11,11 +11,16 @@
     {
         public const string DatabaseConnectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPCampsite;Integrated Security=True";
 
+        private ParkSqlDAL parkDAL = new ParkSqlDAL(DatabaseConnectionString);
+
         private IList<Park> parks;
 
-        public ParkMenuCLI(IList<Park> parks)
+        // Whenever ParkMenuCLI is instantiated, it immediately builds a list of parks
+        // and runs the command line interface
+        public ParkMenuCLI()
         {
-            this.parks = parks;
+            this.parks = this.parkDAL.GetAllParks();
+            this.RunCLI();
         }
 
         public void RunCLI()
@@ -34,10 +39,10 @@
             Console.Clear();
             Console.WriteLine($"Park Information Screen");
             Console.WriteLine($"{selectedPark.Name}");
-            Console.WriteLine($"{selectedPark.Location}");
-            Console.WriteLine($"{selectedPark.Establish_Date}");
-            Console.WriteLine($"{selectedPark.Area}");
-            Console.WriteLine($"{selectedPark.Visitors}");
+            Console.WriteLine($"Location: {selectedPark.Location}");
+            Console.WriteLine($"Established: {selectedPark.Establish_Date.ToShortDateString()}");
+            Console.WriteLine($"Area: {selectedPark.Area} sq km");
+            Console.WriteLine($"Annual Visitors: {selectedPark.Visitors}");
             Console.WriteLine();
             Console.WriteLine($"{selectedPark.Description}");
             Console.WriteLine();
@@ -45,6 +50,7 @@
             IList<Campground> campgrounds = dal.GetAllCampgrounds(selectedPark.Park_Id);
             ParkCampgroundsMenu campgroundsMenu = new ParkCampgroundsMenu(campgrounds);
             campgroundsMenu.RunCLI();
+            return;
         }
 
     private void PrintParks()

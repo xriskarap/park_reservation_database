@@ -10,7 +10,7 @@ namespace Capstone
     {
         public static DateTime GetDateTime(string message)
         {
-            string userInput = String.Empty;
+            string userInput = string.Empty;
             DateTime dateValue = DateTime.MinValue;
             int numberOfAttempts = 0;
 
@@ -32,7 +32,7 @@ namespace Capstone
 
         public static int GetInteger(string message)
         {
-            string userInput = String.Empty;
+            string userInput = string.Empty;
             int intValue = 0;
             int numberOfAttempts = 0;
 
@@ -79,7 +79,7 @@ namespace Capstone
 
         public static bool GetBool(string message)
         {
-            string userInput = String.Empty;
+            string userInput = string.Empty;
             bool boolValue = false;
             int numberOfAttempts = 0;
 
@@ -101,7 +101,7 @@ namespace Capstone
 
         public static string GetString(string message)
         {
-            string userInput = String.Empty;
+            string userInput = string.Empty;
             int numberOfAttempts = 0;
 
             do
@@ -115,7 +115,7 @@ namespace Capstone
                 userInput = Console.ReadLine();
                 numberOfAttempts++;
             }
-            while (String.IsNullOrEmpty(userInput));
+            while (string.IsNullOrEmpty(userInput));
 
             return userInput;
         }
