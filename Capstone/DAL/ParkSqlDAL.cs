@@ -15,6 +15,10 @@ namespace Capstone.DAL
             this.connectionString = dbConnectionString;
         }
 
+        /// <summary>
+        /// Queries the database to return a list of all Parks
+        /// </summary>
+        /// <returns>A list of Parks</returns>
         public IList<Park> GetAllParks()
         {
             List<Park> output = new List<Park>();

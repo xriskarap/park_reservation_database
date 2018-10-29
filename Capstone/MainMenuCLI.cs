@@ -23,11 +23,10 @@ namespace Capstone
             {
                 string command = Console.ReadLine();
 
-                Console.Clear();
-
                 switch (command.ToLower())
                 {
                     case Command_AllParks:
+                        Console.Clear();
                         new ParkMenuCLI();
                         return;
 

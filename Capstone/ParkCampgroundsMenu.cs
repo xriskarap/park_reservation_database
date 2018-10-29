@@ -47,14 +47,8 @@
                 switch (command.ToLower())
                 {
                     case Command_ViewAllCampgrounds:
-                        // go through the list of campgrounds and display
                         this.PrintCampground();
-                        break;
-
-                    // case Command_ReturnToPreviousMenu:
-                    //    ParkMenuCLI parkMenu = new ParkMenuCLI(GetAllParks());
-                    //    parkMenu.RunCLI();
-                    //    break;
+                        return;
                     case Command_ReturnToPreviousMenu:
                         Console.Clear();
                         new ParkMenuCLI();
@@ -66,6 +60,10 @@
             }
         }
 
+        /// <summary>
+        /// Gives a list of all campgrounds associated with the Park chosen by a user
+        /// Passes the park_id chosen by our user to list all campgrounds
+        /// </summary>
         public void ListAllCampgrounds()
         {
             this.PrintMenu();
@@ -92,7 +90,7 @@
             Console.WriteLine("Select a Command");
             Console.WriteLine();
             Console.WriteLine("1) View All Campgrounds");
-            Console.WriteLine("2) Search For Reservation");
+            Console.WriteLine("2) Search For Reservation (not currently implemented)");
             Console.WriteLine("3) Return to Previous Screen");
             Console.WriteLine();
         }
@@ -105,6 +103,11 @@
             return campground;
         }
 
+        /// <summary>
+        /// Shows a user the properties of a campground
+        /// And allows them to see availability
+        /// </summary>
+        /// <returns>Campgrounds</returns>
         private ReservationCLI PrintCampground()
         {
             int selection = 0;
@@ -122,6 +125,10 @@
             return this.GetUserSelection();
         }
 
+        /// <summary>
+        /// Takes in a user input to chose a park and reservation time
+        /// </summary>
+        /// <returns>Reservation</returns>
         private ReservationCLI GetUserSelection()
         {
             Campground campground = new Campground();
@@ -129,18 +136,33 @@
             Console.WriteLine();
             Console.WriteLine("Which campground (enter 0 to cancel)");
 
-            int userSelection = int.Parse(Console.ReadLine());
+            string userSelectionString = Console.ReadLine();
 
-            while (userSelection > this.campground.Count)
+            // While the userSelectionString can't be parsed as an integer,
+            // or the userSelectionString refers to an element that does not exist,
+            // or the userSelectionString is less than 1,
+            // prompt for input
+            while (int.TryParse(userSelectionString, out int discard) == false || int.Parse(userSelectionString) > this.campground.Count || int.Parse(userSelectionString) < 0)
             {
                 Console.WriteLine("Sorry, that's not a valid selection.");
                 Console.WriteLine("Please make another selection.");
-                userSelection = int.Parse(Console.ReadLine());
+                userSelectionString = Console.ReadLine();
             }
+
+            if (int.Parse(userSelectionString) == 0)
+            {
+                return new ReservationCLI(campground, false);
+            }
+
+            int userSelection = int.Parse(userSelectionString);
 
             campground = this.campground[userSelection - 1];
 
-            ReservationCLI reservationCLI = new ReservationCLI(campground);
+            Console.WriteLine();
+            Console.WriteLine($"{campground.Name} selected!");
+            Console.WriteLine();
+
+            ReservationCLI reservationCLI = new ReservationCLI(campground, true);
 
             return reservationCLI;
         }

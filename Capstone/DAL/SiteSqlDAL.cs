@@ -27,7 +27,7 @@ namespace Capstone.DAL
         /// <param name="endDate">End date for a Reservation</param>
         /// <param name="siteId">The id associated with an individual site</param>
         /// <returns>A list of all Sites</returns>
-        public IList<Site> GetAvailableSites(DateTime startDate, DateTime endDate, int siteId)
+        public IList<Site> GetAvailableSites(DateTime startDate, DateTime endDate, int campgroundId)
         {
             List<Site> availSites = new List<Site>();
 
@@ -35,9 +35,9 @@ namespace Capstone.DAL
             {
                 using (SqlConnection conn = new SqlConnection(this.connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM site WHERE site_id = @site_id AND site_id NOT IN (SELECT site_id FROM[NPCampsite].[dbo].[reservation] WHERE(from_date BETWEEN @startDate AND @endDate) AND(to_date BETWEEN @startDate AND @endDate) AND site_id = @site_id)", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT TOP 5 * FROM site WHERE campground_id = @campgroundId AND site_id IN (SELECT site_id FROM[NPCampsite].[dbo].[reservation] WHERE NOT (from_date BETWEEN @startDate AND @endDate) AND NOT (to_date BETWEEN @startDate AND @endDate))", conn);
 
-                    cmd.Parameters.AddWithValue("@site_id", siteId);
+                    cmd.Parameters.AddWithValue("@campgroundId", campgroundId);
                     cmd.Parameters.AddWithValue("@startDate", startDate);
                     cmd.Parameters.AddWithValue("@endDate", endDate);
 
